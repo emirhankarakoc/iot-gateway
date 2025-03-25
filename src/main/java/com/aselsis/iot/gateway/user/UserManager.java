@@ -1,5 +1,7 @@
 package com.aselsis.iot.gateway.user;
 
+import com.aselsis.iot.gateway.exceptions.BadRequestException;
+import com.aselsis.iot.gateway.exceptions.NotFoundSerialException;
 import com.aselsis.iot.gateway.user.request.PostUserRequest;
 import com.aselsis.iot.gateway.user.request.PutUserRequest;
 import com.aselsis.iot.gateway.exceptions.EntityNotFoundException;
@@ -42,7 +44,7 @@ public class UserManager implements UserService {
         boolean requestedUserNameisExist = this.userRepository.existsByUserName(req.getUserName());
         User user = null;
         if (requestedUserNameisExist) {
-            throw new UserNameExistsException("This username already exists");
+            throw new BadRequestException("This username already exists");
         }
 
         user = this.userRepository.save(User.create(req));
@@ -70,7 +72,7 @@ public class UserManager implements UserService {
         if (requestedUserUserIsExist) {
             this.userRepository.deleteById(id);
         } else {
-            throw new CantDeleteUserException("The user cannot be deleted or has already been deleted.");
+            throw new NotFoundSerialException("The user cannot be deleted or has already been deleted.");
         }
     }
     @Override
@@ -79,7 +81,7 @@ public class UserManager implements UserService {
         if (requestedUserUserIsExist) {
             this.userRepository.deleteByUserName(userName);
         } else {
-            throw new CantDeleteUserException("The user cannot be deleted or has already been deleted.");
+            throw new EntityNotFoundException("The user cannot be deleted or has already been deleted.");
         }
     }
 }

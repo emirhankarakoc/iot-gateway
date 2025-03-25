@@ -10,6 +10,6 @@ public class BadRequestException extends RestException {
 
     public BadRequestException(String message){
         super(message);
-        this.httpStatus = HttpStatus.NOT_FOUND;
+        this.httpStatus = HttpStatus.BAD_REQUEST;
     }
 }

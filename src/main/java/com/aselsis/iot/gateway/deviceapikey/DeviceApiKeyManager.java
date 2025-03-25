@@ -2,7 +2,9 @@ package com.aselsis.iot.gateway.deviceapikey;
 
 import com.aselsis.iot.gateway.deviceapikey.request.PostDeviceApiKeyRequest;
 import com.aselsis.iot.gateway.deviceapikey.request.PutDeviceApiKeyRequest;
+import com.aselsis.iot.gateway.exceptions.BadRequestException;
 import com.aselsis.iot.gateway.exceptions.EntityNotFoundException;
+import com.aselsis.iot.gateway.exceptions.NotFoundSerialException;
 import com.aselsis.iot.gateway.utils.mapper.ModelMapperManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +50,7 @@ public class DeviceApiKeyManager implements DeviceApiKeyService{
             return this.modelMapperManager.forResponse().map(updatedNesne, DeviceApiKeyDTO.class);
 
         } else {
-            throw new CantDeleteUserException("An error occurs somewhere in the DeviceApiKey>Manager>PutRequest class. The id you entered probably does not correspond to anything in the program. You may have sent null data.");
+            throw new EntityNotFoundException("An error occurs somewhere in the DeviceApiKey>Manager>PutRequest class. The id you entered probably does not correspond to anything in the program. You may have sent null data.");
                        }
    }
     @Override
@@ -58,7 +60,7 @@ public class DeviceApiKeyManager implements DeviceApiKeyService{
             this.deviceApiKeyRepository.deleteById(id);
             System.out.println(id + "li deviceApikey silindi. ");
         } else {
-            throw new CantDeleteUserException("Unable to delete deviceApiKey with id-->"+id+". It may have been deleted before.");
+            throw new EntityNotFoundException("Unable to delete deviceApiKey with id-->"+id+". It may have been deleted before.");
         }
     }
 

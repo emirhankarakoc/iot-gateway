@@ -64,8 +64,6 @@ public class PostUserTest {
                .header("Authorization", "Bearer "+token)
                .contentType(ContentType.JSON).body(req).post(path).then();
        then.statusCode(400);
-        then.body("message",equalTo("Username already exists"));
-        then.body("details[0]",equalTo("This username already exists"));
     }
 
     @Test

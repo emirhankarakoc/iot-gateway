@@ -59,7 +59,7 @@ public class IotDataManager implements IotDataService {
        Optional<DeviceApiKey> deviceApiKey = deviceApiKeyService.findByRoom(room);
         if (deviceApiKey.isPresent()){
             return repository.findByRoom(room);
-        } else {throw new NotFoundRoomException(room+" numaralı oda bulunamadı!");}
+        } else {throw new EntityNotFoundException(room+" numaralı oda bulunamadı!");}
     }
     @Override
     public Optional<IotData> getByRoomAndSerial(String room, String serial) {
@@ -69,7 +69,7 @@ public class IotDataManager implements IotDataService {
         if (iotData.isPresent()){
                 return repository.findByRoomAndSerial(room,serial);
         } else {throw new NotFoundSerialException(serial+" numaralı serial bulunamadı!");}
-        }else {throw new NotFoundRoomException(room+" numaralı oda bulunamadı!");}
+        }else {throw new EntityNotFoundException(room+" numaralı oda bulunamadı!");}
     }
 
     @Override
