@@ -1,25 +1,20 @@
 # IoT Gateway Backend
 
-A Java/Spring Boot backend for receiving device data through REST and Socket.IO, storing it in MySQL, and exposing it to authorized clients.
+This Java and Spring Boot app receives device data over REST and Socket.IO. It stores data in MySQL and gives access to signed-in clients.
 
-## Backend scope
-- Device data, user accounts, and client/device API key endpoints
-- Spring Security with JWT authentication
-- REST APIs and a Socket.IO gateway for real-time communication
-- JPA persistence and API documentation
-- RestAssured/JUnit API tests under `src/test`
+## What is in the code
 
-## Stack
-Java 17, Spring Boot, Spring Data JPA, MySQL, Spring Security, JWT, Netty Socket.IO, RestAssured.
+- APIs for users, devices, data, and client/device API keys
+- JWT login and access rules
+- A Socket.IO server for live messages
+- JPA database code and RestAssured/JUnit API tests
 
 ## Run locally
-Install Java 17 and MySQL. Set the datasource URL and username in `src/main/resources/application.properties`, and provide `DB_PASSWORD` and `DEMO_USER_PASSWORD` as environment variables. Then run:
+
+You need Java 17 and MySQL. Set your database URL and user in `src/main/resources/application.properties`. Set `DB_PASSWORD` and `DEMO_USER_PASSWORD` in your environment. Check the Socket.IO host and port in the same properties file.
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-The Socket.IO server uses the host and port configured in `application.properties`. Run the API tests with `./mvnw test`; they require the test database/configuration in the repository and a running MySQL instance.
-
-## Review notes
-This is a project/demo, not a managed production service. Do not reuse its example account or database setup in a deployment. Credentials formerly committed to this repository must be considered exposed and replaced wherever they were used.
+Run `./mvnw test` with the test database and a running MySQL server. This is a demo project, not a hosted IoT service. Replace any old credentials from Git history if they were used on real services.
