@@ -1,75 +1,25 @@
 # IoT Gateway Backend
 
-This project is a backend system for managing IoT devices and their data communication via a centralized server using Spring Boot and WebSockets (Netty SocketIO).  
-It enables devices to send and receive data through a common gateway, using REST APIs or real-time socket communication.
+A Java/Spring Boot backend for receiving device data through REST and Socket.IO, storing it in MySQL, and exposing it to authorized clients.
 
----
+## Backend scope
+- Device data, user accounts, and client/device API key endpoints
+- Spring Security with JWT authentication
+- REST APIs and a Socket.IO gateway for real-time communication
+- JPA persistence and API documentation
+- RestAssured/JUnit API tests under `src/test`
 
-## 🧩 What It Does
+## Stack
+Java 17, Spring Boot, Spring Data JPA, MySQL, Spring Security, JWT, Netty Socket.IO, RestAssured.
 
-- Accepts data from IoT devices via REST endpoints or SocketIO.
-- Persists incoming device data to a MySQL database.
-- Exposes real-time data using WebSocket (Netty SocketIO).
-- Provides secured user and API key management via JWT-based authentication.
-- Offers Swagger documentation for all REST endpoints.
-- Includes a full test suite using RestAssured and JUnit.
-
----
-
-## 📦 Technologies
-
-- **Java 17**
-- **Spring Boot 3.1.4**
-- **Netty-SocketIO**
-- **Spring Security + JWT**
-- **MySQL** (Production & Test)
-- **Spring Data JPA**
-- **Swagger/OpenAPI (springdoc)**
-- **Rest-Assured / Hamcrest (Testing)**
-- **Lombok, ModelMapper, Hypersistence-utils**
-
----
-
-## 📁 Key Modules
-
-- `/iotdata` → Device data handling
-- `/userTest`, `/accountTest`, `/clientApiKeysTest` → Test classes for key modules
-- `application.properties` → Main configuration
-- `application-test.properties` → Separate test database config
-
----
-
-## 🔐 Security
-
-- JWT authentication (Token-based)
-- `admin / 12345` default user (for local dev)
-- API Key support for client/device-level auth
-- All routes protected with Spring Security
-
----
-
-## ⚡ Real-Time Communication
-
-- Devices can connect over **SocketIO (port 8085)**.
-- Data sent by one device can be received by others listening via sockets.
-- Allows server-mediated, real-time message distribution between devices.
-
----
-
-## 🧪 Testing
-
-- Uses **RestAssured** for endpoint testing.
-- Separate MySQL test DB (`application-test.properties`).
-- `ddl-auto=create-drop` ensures fresh schema per test run.
-
----
-
-## ▶️ How to Run
+## Run locally
+Install Java 17 and MySQL. Set the datasource URL and username in `src/main/resources/application.properties`, and provide `DB_PASSWORD` and `DEMO_USER_PASSWORD` as environment variables. Then run:
 
 ```bash
-# 1. Make sure you have Java 17 and MySQL running
-# 2. Configure application.properties if needed
-# 3. Run using Maven
 ./mvnw spring-boot:run
 ```
-old and good days, 2023 winter.
+
+The Socket.IO server uses the host and port configured in `application.properties`. Run the API tests with `./mvnw test`; they require the test database/configuration in the repository and a running MySQL instance.
+
+## Review notes
+This is a project/demo, not a managed production service. Do not reuse its example account or database setup in a deployment. Credentials formerly committed to this repository must be considered exposed and replaced wherever they were used.
