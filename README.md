@@ -17,4 +17,4 @@ You need Java 17 and MySQL. Set your database URL and user in `src/main/resource
 ./mvnw spring-boot:run
 ```
 
-Run `./mvnw test` with the test database and a running MySQL server. This is a demo project, not a hosted IoT service. Replace any old credentials from Git history if they were used on real services.
+Run `./mvnw test` with the test database and a running MySQL server.
