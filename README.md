@@ -1,6 +1,6 @@
 # IoT Gateway Backend
 
-This Java and Spring Boot app receives device data over REST and Socket.IO. It stores data in MySQL and gives access to signed-in clients.
+This Java and Spring Boot app saves device data from REST requests in MySQL. Its Socket.IO server sends live messages between connected clients.
 
 ## What is in the code
 
@@ -17,4 +17,4 @@ You need Java 17 and MySQL. Set your database URL and user in `src/main/resource
 ./mvnw spring-boot:run
 ```
 
-Run `./mvnw test` with the test database and a running MySQL server.
+The RestAssured tests call `http://localhost:8080`. Run the app and MySQL first, then run `./mvnw test` in another terminal.
